@@ -8,11 +8,11 @@ extends Node
 @export var wall_jump_pushback: float = 200.0
 
 func handle_wall_jump(body: CharacterBody2D, jump_input: JumpInput) -> void:
-	if jump_input.wants_jump and can_jump(body):
+	if jump_input.wants_jump and can_wall_jump(body):
 		wall_jump(body)
 
-func can_jump(body: CharacterBody2D) -> bool:
-	return raycast_left.is_colliding() or raycast_right.is_colliding()
+func can_wall_jump(body: CharacterBody2D) -> bool:
+	return !body.is_on_floor() and (raycast_left.is_colliding() or raycast_right.is_colliding())
 
 func wall_jump(body: CharacterBody2D) -> void:
 	body.velocity.y = wall_jump_velocity
