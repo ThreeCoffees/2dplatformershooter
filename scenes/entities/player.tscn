@@ -57,6 +57,8 @@ radius = 9.0
 height = 52.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component", "jump_component", "wall_jump_component", "animation_component")]
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("1_g2els")
 gravity_component = NodePath("GravityComponent")
 input_component = NodePath("InputComponent")
@@ -94,7 +96,9 @@ wall_jump_pushback = 250.0
 [node name="RayCastRight" type="RayCast2D" parent="."]
 position = Vector2(0, -26)
 target_position = Vector2(25, 0)
+collision_mask = 4
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
 position = Vector2(0, -26)
 target_position = Vector2(-25, 0)
+collision_mask = 4
