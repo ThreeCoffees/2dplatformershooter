@@ -1,5 +1,6 @@
 class_name InputComponent
 extends Node
+## Component taking input from the player and converting it for use in other components
 
 var input_horizontal: float = 0
 	

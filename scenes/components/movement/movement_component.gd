@@ -1,5 +1,6 @@
 class_name MovementComponent
 extends Node
+## Component handling horizontal movement
 
 @export var speed: float = 100
 @export_range(0,1) var ground_acceleration: float = 0.3

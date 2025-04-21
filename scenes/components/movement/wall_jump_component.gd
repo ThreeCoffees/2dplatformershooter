@@ -1,5 +1,6 @@
 class_name WallJumpComponent
 extends Node
+## Component handling wall jumping
 
 @export var raycast_left: RayCast2D
 @export var raycast_right: RayCast2D

@@ -1,5 +1,6 @@
 class_name AnimationComponent
 extends Node
+## Component handling animations
 
 @export var sprite: AnimatedSprite2D
 

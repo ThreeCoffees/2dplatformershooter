@@ -1,4 +1,5 @@
 class_name JumpInput
+## Class used for controlling jump components
 
 var wants_jump: bool
 var jump_released: bool

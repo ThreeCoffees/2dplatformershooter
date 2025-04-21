@@ -1,5 +1,9 @@
 class_name AdvancedJumpComponent
 extends JumpComponent
+## Component handling advanced jump
+##
+## Allows a [class CharacterBody2D] to jump with a variable height,
+## coyote time, jump_buffering
 
 @export_range(0,1) var jump_cutoff: float = 0.8
 @export var coyote_time: float = 0.08

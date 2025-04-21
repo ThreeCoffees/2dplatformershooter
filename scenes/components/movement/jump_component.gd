@@ -1,5 +1,10 @@
 class_name JumpComponent
 extends Node
+## Component containing the basic jump logic.
+## 
+## Allows a [class CharacterBody2D] to jump with a constant height
+## To use call [method JumpComponent.handle_jump]
+
 
 @export var jump_velocity: float = -400
 
@@ -16,6 +21,10 @@ func has_just_stepped_off_ledge(body: CharacterBody2D) -> bool:
 func can_jump(body: CharacterBody2D) -> bool:
 	return body.is_on_floor()
 
+## Function handling the jump logic.
+##
+## [param body] 		- body that the jump will be applied to
+## [param jump_input] 	- input controlling the jump. Can be from a player or AI controller
 func handle_jump(body: CharacterBody2D, jump_input: JumpInput) -> void:
 	handle_basic_jump(body, jump_input)
 	update_vars_after_jump(body)
