@@ -46,4 +46,4 @@ func jump(body: CharacterBody2D) -> void:
 	super(body)
 	coyote_time_timer.stop()
 	jump_buffer_timer.stop()
-		
+	

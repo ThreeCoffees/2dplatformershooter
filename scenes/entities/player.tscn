@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cc7uo8q0ekdp0"]
+[gd_scene load_steps=13 format=3 uid="uid://cc7uo8q0ekdp0"]
 
 [ext_resource type="Texture2D" uid="uid://lxhxmiglonpr" path="res://assets/Player_Placeholder.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bqd11pvcc7qkk" path="res://scenes/entities/player.gd" id="1_g2els"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cvvqyfpy4vljy" path="res://scenes/components/input_component.tscn" id="4_dqkch"]
 [ext_resource type="PackedScene" uid="uid://d01yesj4e04jf" path="res://scenes/components/movement/movement_component.tscn" id="5_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://dhasqn4jim5yj" path="res://scenes/components/movement/animation_component.tscn" id="6_tuyoq"]
+[ext_resource type="PackedScene" uid="uid://cyptpny7snkgl" path="res://scenes/components/movement/wall_jump_component.tscn" id="8_dnykm"]
 [ext_resource type="PackedScene" uid="uid://qhs724y35i78" path="res://scenes/components/movement/advanced_jump_component.tscn" id="8_smehm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
@@ -55,12 +56,13 @@ animations = [{
 radius = 9.0
 height = 52.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component", "jump_component", "animation_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component", "jump_component", "wall_jump_component", "animation_component")]
 script = ExtResource("1_g2els")
 gravity_component = NodePath("GravityComponent")
 input_component = NodePath("InputComponent")
 movement_component = NodePath("MovementComponent")
 jump_component = NodePath("AdvancedJumpComponent")
+wall_jump_component = NodePath("WallJumpComponent")
 animation_component = NodePath("AnimationComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -83,3 +85,16 @@ speed = 250.0
 sprite = NodePath("../AnimatedSprite2D")
 
 [node name="AdvancedJumpComponent" parent="." instance=ExtResource("8_smehm")]
+
+[node name="WallJumpComponent" parent="." node_paths=PackedStringArray("raycast_left", "raycast_right") instance=ExtResource("8_dnykm")]
+raycast_left = NodePath("../RayCastLeft")
+raycast_right = NodePath("../RayCastRight")
+wall_jump_pushback = 250.0
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, -26)
+target_position = Vector2(25, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, -26)
+target_position = Vector2(-25, 0)
