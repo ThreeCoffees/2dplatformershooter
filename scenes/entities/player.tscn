@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://lxhxmiglonpr" path="res://assets/Player_Placeholder.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bqd11pvcc7qkk" path="res://scenes/entities/player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://dgyhdcrmkx7nn" path="res://scenes/components/movement/gravity_component.tscn" id="3_qhqgy"]
-[ext_resource type="PackedScene" uid="uid://cvvqyfpy4vljy" path="res://scenes/components/input_component.tscn" id="4_dqkch"]
+[ext_resource type="PackedScene" uid="uid://cvvqyfpy4vljy" path="res://scenes/components/controlers/input_component.tscn" id="4_dqkch"]
 [ext_resource type="PackedScene" uid="uid://d01yesj4e04jf" path="res://scenes/components/movement/movement_component.tscn" id="5_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://dhasqn4jim5yj" path="res://scenes/components/movement/animation_component.tscn" id="6_tuyoq"]
 [ext_resource type="PackedScene" uid="uid://cyptpny7snkgl" path="res://scenes/components/movement/wall_jump_component.tscn" id="8_dnykm"]
