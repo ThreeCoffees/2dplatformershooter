@@ -11,9 +11,9 @@ func _ready() -> void:
 	input_horizontal = initial_direction
 	
 func _process(_delta: float) -> void:
-	if left_raycast.is_colliding():
+	if !left_raycast == null and left_raycast.is_colliding():
 		input_horizontal = 1
-	elif right_raycast.is_colliding():
+	elif !right_raycast == null and right_raycast.is_colliding():
 		input_horizontal = -1
 
 func get_jump_input() -> JumpInput:

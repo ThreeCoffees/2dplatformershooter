@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://cfarrr3b1stxl"]
+[gd_scene load_steps=8 format=4 uid="uid://cfarrr3b1stxl"]
 
 [ext_resource type="PackedScene" uid="uid://cc7uo8q0ekdp0" path="res://scenes/entities/player.tscn" id="1_eqihu"]
 [ext_resource type="Texture2D" uid="uid://dvbm34s7cxjg8" path="res://assets/Tilemap_Placeholder.png" id="2_61jgc"]
 [ext_resource type="PackedScene" uid="uid://dscn2pfs3h36g" path="res://scenes/entities/enemy.tscn" id="3_61jgc"]
+[ext_resource type="PackedScene" uid="uid://qwqk3qbb00to" path="res://scenes/entities/patrolling_enemy.tscn" id="4_riktp"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 
@@ -42,4 +43,7 @@ tile_map_data = PackedByteArray("AAD+/wEAAQAAAAEAAAD//wEAAQAAAAEAAAAAAAEAAQAAAAE
 tile_set = SubResource("TileSet_lbhrr")
 
 [node name="Enemy" parent="." instance=ExtResource("3_61jgc")]
-position = Vector2(300, 249)
+position = Vector2(540, 184)
+
+[node name="PatrollingEnemy" parent="." instance=ExtResource("4_riktp")]
+position = Vector2(291, 263)
