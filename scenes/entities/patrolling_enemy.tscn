@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://qwqk3qbb00to"]
+[gd_scene load_steps=11 format=3 uid="uid://c6g2j4bykklfu"]
 
-[ext_resource type="Script" uid="uid://cvywo50tbriw4" path="res://scenes/entities/patrolling_enemy.gd" id="1_710my"]
+[ext_resource type="PackedScene" uid="uid://dscn2pfs3h36g" path="res://scenes/entities/enemy.tscn" id="1_710my"]
 [ext_resource type="Texture2D" uid="uid://lxhxmiglonpr" path="res://assets/Player_Placeholder.png" id="2_hfdr2"]
 [ext_resource type="PackedScene" uid="uid://dgyhdcrmkx7nn" path="res://scenes/components/movement/gravity_component.tscn" id="3_ivh63"]
 [ext_resource type="PackedScene" uid="uid://d01yesj4e04jf" path="res://scenes/components/movement/movement_component.tscn" id="4_ibo2p"]
 [ext_resource type="PackedScene" uid="uid://dhasqn4jim5yj" path="res://scenes/components/movement/animation_component.tscn" id="5_oe8id"]
-[ext_resource type="PackedScene" uid="uid://bpg2scmhf5y10" path="res://scenes/components/controlers/ai_component.tscn" id="6_is1ak"]
+[ext_resource type="PackedScene" uid="uid://bpg2scmhf5y10" path="res://scenes/components/controlers/patrolling_ai_component.tscn" id="6_hfdr2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
 atlas = ExtResource("2_hfdr2")
@@ -15,7 +15,7 @@ region = Rect2(0, 0, 32, 64)
 atlas = ExtResource("2_hfdr2")
 region = Rect2(0, 0, 32, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_4fpkd"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ivh63"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -50,45 +50,42 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wqw0c"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ibo2p"]
 radius = 9.0
 height = 52.0
 
-[node name="PatrollingEnemy" type="CharacterBody2D" node_paths=PackedStringArray("movement_component", "gravity_component", "ai_component", "animation_component")]
-collision_layer = 2
-collision_mask = 4
-script = ExtResource("1_710my")
-movement_component = NodePath("MovementComponent")
+[node name="PatrollingEnemy" node_paths=PackedStringArray("gravity_component", "movement_ai_component", "animation_component", "movement_component") instance=ExtResource("1_710my")]
 gravity_component = NodePath("GravityComponent")
-ai_component = NodePath("AIComponent")
+movement_ai_component = NodePath("PatrollingAIComponent")
 animation_component = NodePath("AnimationComponent")
+movement_component = NodePath("MovementComponent")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -32)
-sprite_frames = SubResource("SpriteFrames_4fpkd")
+sprite_frames = SubResource("SpriteFrames_ivh63")
 animation = &"fall"
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, -26)
-shape = SubResource("CapsuleShape2D_wqw0c")
+shape = SubResource("CapsuleShape2D_ibo2p")
 
-[node name="GravityComponent" parent="." instance=ExtResource("3_ivh63")]
+[node name="GravityComponent" parent="." index="2" instance=ExtResource("3_ivh63")]
 
-[node name="MovementComponent" parent="." instance=ExtResource("4_ibo2p")]
-
-[node name="AnimationComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_oe8id")]
+[node name="AnimationComponent" parent="." index="3" node_paths=PackedStringArray("sprite") instance=ExtResource("5_oe8id")]
 sprite = NodePath("../AnimatedSprite2D")
 
-[node name="AIComponent" parent="." node_paths=PackedStringArray("left_raycast", "right_raycast") instance=ExtResource("6_is1ak")]
+[node name="MovementComponent" parent="." index="4" instance=ExtResource("4_ibo2p")]
+
+[node name="PatrollingAIComponent" parent="." index="5" node_paths=PackedStringArray("left_raycast", "right_raycast") instance=ExtResource("6_hfdr2")]
 left_raycast = NodePath("../RayCastLeft")
 right_raycast = NodePath("../RayCastRight")
 
-[node name="RayCastRight" type="RayCast2D" parent="."]
+[node name="RayCastRight" type="RayCast2D" parent="." index="6"]
 position = Vector2(0, -26)
 target_position = Vector2(25, 0)
 collision_mask = 4
 
-[node name="RayCastLeft" type="RayCast2D" parent="."]
+[node name="RayCastLeft" type="RayCast2D" parent="." index="7"]
 position = Vector2(0, -26)
 target_position = Vector2(-25, 0)
 collision_mask = 4
