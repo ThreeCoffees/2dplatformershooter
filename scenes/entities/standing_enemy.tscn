@@ -1,0 +1,92 @@
+[gd_scene load_steps=11 format=3 uid="uid://bsjehw2cmunt1"]
+
+[ext_resource type="PackedScene" uid="uid://dscn2pfs3h36g" path="res://scenes/entities/enemy.tscn" id="1_dfmy0"]
+[ext_resource type="Texture2D" uid="uid://lxhxmiglonpr" path="res://assets/Player_Placeholder.png" id="2_csayt"]
+[ext_resource type="PackedScene" uid="uid://dgyhdcrmkx7nn" path="res://scenes/components/movement/gravity_component.tscn" id="3_d7egk"]
+[ext_resource type="PackedScene" uid="uid://dhasqn4jim5yj" path="res://scenes/components/movement/animation_component.tscn" id="4_832d2"]
+[ext_resource type="PackedScene" uid="uid://d01yesj4e04jf" path="res://scenes/components/movement/movement_component.tscn" id="5_yhl7k"]
+[ext_resource type="PackedScene" uid="uid://bpg2scmhf5y10" path="res://scenes/components/controlers/patrolling_ai_component.tscn" id="6_1iekd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("2_csayt")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vyb7"]
+atlas = ExtResource("2_csayt")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qqpax"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vyb7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vyb7")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vyb7")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uoak8"]
+radius = 9.0
+height = 52.0
+
+[node name="StandingEnemy" node_paths=PackedStringArray("gravity_component", "movement_ai_component", "animation_component", "movement_component") instance=ExtResource("1_dfmy0")]
+gravity_component = NodePath("GravityComponent")
+movement_ai_component = NodePath("PatrollingAIComponent")
+animation_component = NodePath("AnimationComponent")
+movement_component = NodePath("MovementComponent")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_qqpax")
+animation = &"fall"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -26)
+shape = SubResource("CapsuleShape2D_uoak8")
+
+[node name="GravityComponent" parent="." index="2" instance=ExtResource("3_d7egk")]
+
+[node name="AnimationComponent" parent="." index="3" node_paths=PackedStringArray("sprite") instance=ExtResource("4_832d2")]
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="MovementComponent" parent="." index="4" instance=ExtResource("5_yhl7k")]
+
+[node name="PatrollingAIComponent" parent="." index="5" node_paths=PackedStringArray("left_raycast", "right_raycast") instance=ExtResource("6_1iekd")]
+left_raycast = NodePath("../RayCastLeft")
+right_raycast = NodePath("../RayCastRight")
+is_patrolling = false
+
+[node name="RayCastRight" type="RayCast2D" parent="." index="6"]
+position = Vector2(0, -26)
+target_position = Vector2(25, 0)
+collision_mask = 4
+
+[node name="RayCastLeft" type="RayCast2D" parent="." index="7"]
+position = Vector2(0, -26)
+target_position = Vector2(-25, 0)
+collision_mask = 4

@@ -87,6 +87,7 @@ speed = 250.0
 sprite = NodePath("../AnimatedSprite2D")
 
 [node name="AdvancedJumpComponent" parent="." instance=ExtResource("8_smehm")]
+jump_buffer = 0.16
 
 [node name="WallJumpComponent" parent="." node_paths=PackedStringArray("raycast_left", "raycast_right") instance=ExtResource("8_dnykm")]
 raycast_left = NodePath("../RayCastLeft")
