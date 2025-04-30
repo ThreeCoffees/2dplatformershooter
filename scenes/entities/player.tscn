@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cc7uo8q0ekdp0"]
+[gd_scene load_steps=14 format=3 uid="uid://cc7uo8q0ekdp0"]
 
 [ext_resource type="Texture2D" uid="uid://lxhxmiglonpr" path="res://assets/Player_Placeholder.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bqd11pvcc7qkk" path="res://scenes/entities/player.gd" id="1_g2els"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dhasqn4jim5yj" path="res://scenes/components/movement/animation_component.tscn" id="6_tuyoq"]
 [ext_resource type="PackedScene" uid="uid://cyptpny7snkgl" path="res://scenes/components/movement/wall_jump_component.tscn" id="8_dnykm"]
 [ext_resource type="PackedScene" uid="uid://qhs724y35i78" path="res://scenes/components/movement/advanced_jump_component.tscn" id="8_smehm"]
+[ext_resource type="PackedScene" uid="uid://dtkqkm7e0206w" path="res://scenes/components/health_component.tscn" id="9_c5rqy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
 atlas = ExtResource("1_3vyb7")
@@ -103,3 +104,6 @@ collision_mask = 4
 position = Vector2(0, -26)
 target_position = Vector2(-25, 0)
 collision_mask = 4
+
+[node name="HealthComponent" parent="." instance=ExtResource("9_c5rqy")]
+max_health = 100.0

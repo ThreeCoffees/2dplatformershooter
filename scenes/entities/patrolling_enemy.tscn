@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6g2j4bykklfu"]
+[gd_scene load_steps=13 format=3 uid="uid://c6g2j4bykklfu"]
 
 [ext_resource type="PackedScene" uid="uid://dscn2pfs3h36g" path="res://scenes/entities/enemy.tscn" id="1_710my"]
 [ext_resource type="Texture2D" uid="uid://lxhxmiglonpr" path="res://assets/Player_Placeholder.png" id="2_hfdr2"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://d01yesj4e04jf" path="res://scenes/components/movement/movement_component.tscn" id="4_ibo2p"]
 [ext_resource type="PackedScene" uid="uid://dhasqn4jim5yj" path="res://scenes/components/movement/animation_component.tscn" id="5_oe8id"]
 [ext_resource type="PackedScene" uid="uid://bpg2scmhf5y10" path="res://scenes/components/controlers/patrolling_ai_component.tscn" id="6_hfdr2"]
+[ext_resource type="PackedScene" uid="uid://dwgf5uyl662tw" path="res://scenes/components/UI/health_bar.tscn" id="7_hfdr2"]
+[ext_resource type="PackedScene" uid="uid://dtkqkm7e0206w" path="res://scenes/components/health_component.tscn" id="7_ivh63"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
 atlas = ExtResource("2_hfdr2")
@@ -89,3 +91,11 @@ collision_mask = 4
 position = Vector2(0, -26)
 target_position = Vector2(-25, 0)
 collision_mask = 4
+
+[node name="HealthComponent" parent="." index="8" instance=ExtResource("7_ivh63")]
+
+[node name="HealthBar" parent="." index="9" node_paths=PackedStringArray("health_component") instance=ExtResource("7_hfdr2")]
+health_component = NodePath("../HealthComponent")
+
+[connection signal="health_changed" from="HealthComponent" to="HealthBar" method="_on_health_component_health_changed"]
+[connection signal="max_health_changed" from="HealthComponent" to="HealthBar" method="_on_health_component_max_health_changed"]
