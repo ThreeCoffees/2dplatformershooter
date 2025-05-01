@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bsjehw2cmunt1"]
+[gd_scene load_steps=15 format=3 uid="uid://bsjehw2cmunt1"]
 
 [ext_resource type="PackedScene" uid="uid://dscn2pfs3h36g" path="res://scenes/entities/enemy.tscn" id="1_dfmy0"]
 [ext_resource type="Texture2D" uid="uid://lxhxmiglonpr" path="res://assets/Player_Placeholder.png" id="2_csayt"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dhasqn4jim5yj" path="res://scenes/components/movement/animation_component.tscn" id="4_832d2"]
 [ext_resource type="PackedScene" uid="uid://d01yesj4e04jf" path="res://scenes/components/movement/movement_component.tscn" id="5_yhl7k"]
 [ext_resource type="PackedScene" uid="uid://bpg2scmhf5y10" path="res://scenes/components/controlers/patrolling_ai_component.tscn" id="6_1iekd"]
+[ext_resource type="PackedScene" uid="uid://dtkqkm7e0206w" path="res://scenes/components/health_component.tscn" id="7_d7egk"]
+[ext_resource type="PackedScene" uid="uid://dwgf5uyl662tw" path="res://scenes/components/UI/health_bar.tscn" id="8_832d2"]
+[ext_resource type="PackedScene" uid="uid://c8pyultv2bmi0" path="res://scenes/components/damage_handling/hurt_box.tscn" id="9_832d2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
 atlas = ExtResource("2_csayt")
@@ -54,6 +57,9 @@ animations = [{
 radius = 9.0
 height = 52.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhl7k"]
+size = Vector2(20, 52)
+
 [node name="StandingEnemy" node_paths=PackedStringArray("gravity_component", "movement_ai_component", "animation_component", "movement_component") instance=ExtResource("1_dfmy0")]
 gravity_component = NodePath("GravityComponent")
 movement_ai_component = NodePath("PatrollingAIComponent")
@@ -90,3 +96,22 @@ collision_mask = 4
 position = Vector2(0, -26)
 target_position = Vector2(-25, 0)
 collision_mask = 4
+
+[node name="HealthComponent" parent="." index="8" instance=ExtResource("7_d7egk")]
+max_health = 20.0
+
+[node name="HealthBar" parent="." index="9" node_paths=PackedStringArray("health_component") instance=ExtResource("8_832d2")]
+max_value = 20.0
+value = 20.0
+health_component = NodePath("../HealthComponent")
+
+[node name="HurtBox" parent="." index="10" node_paths=PackedStringArray("health_component") instance=ExtResource("9_832d2")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0, -26)
+shape = SubResource("RectangleShape2D_yhl7k")
+
+[connection signal="health_changed" from="HealthComponent" to="HealthBar" method="_on_health_component_health_changed"]
+[connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
+[connection signal="max_health_changed" from="HealthComponent" to="HealthBar" method="_on_health_component_max_health_changed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cc7uo8q0ekdp0"]
+[gd_scene load_steps=17 format=3 uid="uid://cc7uo8q0ekdp0"]
 
 [ext_resource type="Texture2D" uid="uid://lxhxmiglonpr" path="res://assets/Player_Placeholder.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bqd11pvcc7qkk" path="res://scenes/entities/player.gd" id="1_g2els"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://dhasqn4jim5yj" path="res://scenes/components/movement/animation_component.tscn" id="6_tuyoq"]
 [ext_resource type="PackedScene" uid="uid://cyptpny7snkgl" path="res://scenes/components/movement/wall_jump_component.tscn" id="8_dnykm"]
 [ext_resource type="PackedScene" uid="uid://qhs724y35i78" path="res://scenes/components/movement/advanced_jump_component.tscn" id="8_smehm"]
+[ext_resource type="PackedScene" uid="uid://dtkqkm7e0206w" path="res://scenes/components/health_component.tscn" id="9_c5rqy"]
+[ext_resource type="PackedScene" uid="uid://dwgf5uyl662tw" path="res://scenes/components/UI/health_bar.tscn" id="10_b6tgf"]
+[ext_resource type="PackedScene" uid="uid://c8pyultv2bmi0" path="res://scenes/components/damage_handling/hurt_box.tscn" id="11_73kkf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
 atlas = ExtResource("1_3vyb7")
@@ -56,6 +59,9 @@ animations = [{
 radius = 9.0
 height = 52.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b6tgf"]
+size = Vector2(20, 54)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component", "jump_component", "wall_jump_component", "animation_component")]
 collision_layer = 2
 collision_mask = 4
@@ -103,3 +109,29 @@ collision_mask = 4
 position = Vector2(0, -26)
 target_position = Vector2(-25, 0)
 collision_mask = 4
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" parent="HUD" node_paths=PackedStringArray("health_component") instance=ExtResource("10_b6tgf")]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 144.0
+offset_bottom = 32.0
+grow_horizontal = 1
+value = 100.0
+health_component = NodePath("../../HealthComponent")
+metadata/_edit_use_anchors_ = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("9_c5rqy")]
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("11_73kkf")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -26)
+shape = SubResource("RectangleShape2D_b6tgf")
+
+[connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
