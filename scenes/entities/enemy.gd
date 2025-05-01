@@ -35,3 +35,4 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 func _on_health_component_health_depleted() -> void:
 	print("Enemy died")
+
