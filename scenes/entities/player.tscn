@@ -110,11 +110,22 @@ position = Vector2(0, -26)
 target_position = Vector2(-25, 0)
 collision_mask = 4
 
-[node name="HealthComponent" parent="." instance=ExtResource("9_c5rqy")]
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("10_b6tgf")]
+[node name="HealthBar" parent="HUD" node_paths=PackedStringArray("health_component") instance=ExtResource("10_b6tgf")]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 144.0
+offset_bottom = 32.0
+grow_horizontal = 1
 value = 100.0
-health_component = NodePath("../HealthComponent")
+health_component = NodePath("../../HealthComponent")
+metadata/_edit_use_anchors_ = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("9_c5rqy")]
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("11_73kkf")]
 health_component = NodePath("../HealthComponent")
@@ -123,6 +134,4 @@ health_component = NodePath("../HealthComponent")
 position = Vector2(0, -26)
 shape = SubResource("RectangleShape2D_b6tgf")
 
-[connection signal="health_changed" from="HealthComponent" to="HealthBar" method="_on_health_component_health_changed"]
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
-[connection signal="max_health_changed" from="HealthComponent" to="HealthBar" method="_on_health_component_max_health_changed"]
