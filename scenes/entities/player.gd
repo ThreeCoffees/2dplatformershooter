@@ -22,3 +22,7 @@ func _physics_process(delta: float) -> void:
 	animation_component.handle_jump_animation(jump_component.is_jumping, !jump_component.is_going_up)
 
 	move_and_slide()
+
+
+func _on_health_component_health_depleted() -> void:
+	print("Player died")

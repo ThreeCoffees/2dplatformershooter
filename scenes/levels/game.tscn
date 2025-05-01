@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://cfarrr3b1stxl"]
+[gd_scene load_steps=11 format=4 uid="uid://cfarrr3b1stxl"]
 
 [ext_resource type="PackedScene" uid="uid://cc7uo8q0ekdp0" path="res://scenes/entities/player.tscn" id="1_eqihu"]
 [ext_resource type="Texture2D" uid="uid://dvbm34s7cxjg8" path="res://assets/Tilemap_Placeholder.png" id="2_61jgc"]
 [ext_resource type="PackedScene" uid="uid://bsjehw2cmunt1" path="res://scenes/entities/standing_enemy.tscn" id="3_61jgc"]
 [ext_resource type="PackedScene" uid="uid://c6g2j4bykklfu" path="res://scenes/entities/patrolling_enemy.tscn" id="4_riktp"]
+[ext_resource type="PackedScene" uid="uid://dlqj0jglg6wl1" path="res://scenes/components/damage_handling/hit_box.tscn" id="5_limtx"]
+[ext_resource type="Texture2D" uid="uid://d4jnxp5oeqoin" path="res://icon.svg" id="6_7rg7d"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 
@@ -18,6 +20,9 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 0
 sources/1 = SubResource("TileSetAtlasSource_lnu2h")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xmnyv"]
+size = Vector2(60, 60)
 
 [node name="Game" type="Node2D"]
 
@@ -47,3 +52,17 @@ position = Vector2(545, 186)
 
 [node name="PatrollingEnemy" parent="." instance=ExtResource("4_riktp")]
 position = Vector2(293, 259)
+
+[node name="HitBox" parent="." instance=ExtResource("5_limtx")]
+modulate = Color(1, 0.4, 0.388235, 1)
+position = Vector2(508, 245)
+collision_layer = 8
+collision_mask = 10
+health_change = -5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_xmnyv")
+
+[node name="tmp_sprite" type="Sprite2D" parent="HitBox"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_7rg7d")

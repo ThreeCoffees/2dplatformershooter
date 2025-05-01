@@ -31,3 +31,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 	if movement_component == null:
 		warnings.append("Enemy needs a movement component")
 	return warnings
+
+
+func _on_health_component_health_depleted() -> void:
+	print("Enemy died")

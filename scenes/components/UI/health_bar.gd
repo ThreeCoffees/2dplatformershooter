@@ -16,3 +16,10 @@ func _on_health_component_max_health_changed(old_value: float, new_value: float)
 
 func _on_health_component_health_changed(old_value: float, new_value: float) -> void:
 	value = new_value
+	
+
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings = []
+	if health_component == null:
+		warnings.append("HealthBar needs to have a HealthComponent assigned to it.")
+	return warnings

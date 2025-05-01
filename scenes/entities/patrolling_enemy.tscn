@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c6g2j4bykklfu"]
+[gd_scene load_steps=15 format=3 uid="uid://c6g2j4bykklfu"]
 
 [ext_resource type="PackedScene" uid="uid://dscn2pfs3h36g" path="res://scenes/entities/enemy.tscn" id="1_710my"]
 [ext_resource type="Texture2D" uid="uid://lxhxmiglonpr" path="res://assets/Player_Placeholder.png" id="2_hfdr2"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bpg2scmhf5y10" path="res://scenes/components/controlers/patrolling_ai_component.tscn" id="6_hfdr2"]
 [ext_resource type="PackedScene" uid="uid://dwgf5uyl662tw" path="res://scenes/components/UI/health_bar.tscn" id="7_hfdr2"]
 [ext_resource type="PackedScene" uid="uid://dtkqkm7e0206w" path="res://scenes/components/health_component.tscn" id="7_ivh63"]
+[ext_resource type="PackedScene" uid="uid://c8pyultv2bmi0" path="res://scenes/components/damage_handling/hurt_box.tscn" id="9_ibo2p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
 atlas = ExtResource("2_hfdr2")
@@ -56,6 +57,9 @@ animations = [{
 radius = 9.0
 height = 52.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oe8id"]
+size = Vector2(20, 52)
+
 [node name="PatrollingEnemy" node_paths=PackedStringArray("gravity_component", "movement_ai_component", "animation_component", "movement_component") instance=ExtResource("1_710my")]
 gravity_component = NodePath("GravityComponent")
 movement_ai_component = NodePath("PatrollingAIComponent")
@@ -93,9 +97,20 @@ target_position = Vector2(-25, 0)
 collision_mask = 4
 
 [node name="HealthComponent" parent="." index="8" instance=ExtResource("7_ivh63")]
+max_health = 20.0
 
 [node name="HealthBar" parent="." index="9" node_paths=PackedStringArray("health_component") instance=ExtResource("7_hfdr2")]
+max_value = 20.0
+value = 20.0
 health_component = NodePath("../HealthComponent")
 
+[node name="HurtBox" parent="." index="10" node_paths=PackedStringArray("health_component") instance=ExtResource("9_ibo2p")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0, -26)
+shape = SubResource("RectangleShape2D_oe8id")
+
 [connection signal="health_changed" from="HealthComponent" to="HealthBar" method="_on_health_component_health_changed"]
+[connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
 [connection signal="max_health_changed" from="HealthComponent" to="HealthBar" method="_on_health_component_max_health_changed"]
