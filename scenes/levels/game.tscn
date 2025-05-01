@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dvbm34s7cxjg8" path="res://assets/Tilemap_Placeholder.png" id="2_61jgc"]
 [ext_resource type="PackedScene" uid="uid://dscn2pfs3h36g" path="res://scenes/entities/enemy.tscn" id="3_61jgc"]
 [ext_resource type="PackedScene" uid="uid://qwqk3qbb00to" path="res://scenes/entities/patrolling_enemy.tscn" id="4_riktp"]
-[ext_resource type="PackedScene" uid="uid://cu2pm7fkcnbj" path="res://scenes/entities/weapons/handgun.tscn" id="5_a1osm"]
+[ext_resource type="PackedScene" uid="uid://casheakb8uimd" path="res://scenes/entities/weapons/weapon.tscn" id="5_a1osm"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 
@@ -49,5 +49,5 @@ position = Vector2(540, 184)
 [node name="PatrollingEnemy" parent="." instance=ExtResource("4_riktp")]
 position = Vector2(291, 263)
 
-[node name="Handgun" parent="." instance=ExtResource("5_a1osm")]
-position = Vector2(189, 89)
+[node name="Weapon" parent="." instance=ExtResource("5_a1osm")]
+position = Vector2(167, 86)

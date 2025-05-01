@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cu2pm7fkcnbj"]
 
-[ext_resource type="Script" uid="uid://ce8uil7n16nr" path="res://scenes/entities/weapons/weapon.gd" id="1_c3gc1"]
-[ext_resource type="Texture2D" uid="uid://cq6fm527igtjq" path="res://assets/Handgun_Placeholder.bmp" id="1_vdes4"]
+[ext_resource type="Script" uid="uid://ce8uil7n16nr" path="res://scenes/entities/weapons/weapon.gd" id="1_ay0mt"]
+[ext_resource type="Texture2D" uid="uid://cq6fm527igtjq" path="res://assets/Handgun_Placeholder.bmp" id="2_qu2ni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vdes4"]
 size = Vector2(75, 75)
@@ -9,11 +9,11 @@ size = Vector2(75, 75)
 [node name="Handgun" type="Area2D"]
 collision_layer = 8
 collision_mask = 2
-script = ExtResource("1_c3gc1")
+script = ExtResource("1_ay0mt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_vdes4")
+texture = ExtResource("2_qu2ni")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vdes4")

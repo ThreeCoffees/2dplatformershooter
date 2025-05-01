@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://casheakb8uimd"]
+
+[ext_resource type="Script" uid="uid://ce8uil7n16nr" path="res://scenes/entities/weapons/weapon.gd" id="1_6x0ya"]
+[ext_resource type="Texture2D" uid="uid://cq6fm527igtjq" path="res://assets/Handgun_Placeholder.bmp" id="2_s878h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ngm12"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_grkig"]
+
+[node name="Weapon" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_6x0ya")
+
+[node name="BulletRateTimer" type="Timer" parent="."]
+process_callback = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ngm12")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_grkig")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_s878h")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="BulletRateTimer" to="." method="fire_bullet"]
+[connection signal="timeout" from="BulletRateTimer" to="." method="_fire_bullet"]

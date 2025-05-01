@@ -12,3 +12,7 @@ func get_jump_input() -> JumpInput:
 	
 func get_aim_point() -> Vector2:
 	return get_viewport().get_camera_2d().get_global_mouse_position()
+
+func get_fire_input() -> FireInput:
+	return FireInput.new(Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT))
+	
