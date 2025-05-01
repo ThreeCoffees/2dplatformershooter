@@ -75,6 +75,4 @@ shape = SubResource("CapsuleShape2D_wqw0c")
 [node name="AnimationComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("4_4fpkd")]
 sprite = NodePath("../AnimatedSprite2D")
 
-[node name="AIComponent" parent="." node_paths=PackedStringArray("left_raycast", "right_raycast") instance=ExtResource("6_hlb8m")]
-left_raycast = NodePath("")
-right_raycast = NodePath("")
+[node name="AIComponent" parent="." instance=ExtResource("6_hlb8m")]

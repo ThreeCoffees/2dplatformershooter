@@ -22,3 +22,9 @@ func _physics_process(delta: float) -> void:
 	animation_component.handle_jump_animation(jump_component.is_jumping, !jump_component.is_going_up)
 
 	move_and_slide()
+	
+func equip_weapon(weapon: Weapon):
+	weapon.get_parent().remove_child(weapon)
+	add_child(weapon)
+	
+	weapon.position = Vector2.ZERO
