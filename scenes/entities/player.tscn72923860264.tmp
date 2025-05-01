@@ -68,7 +68,7 @@ jump_component = NodePath("AdvancedJumpComponent")
 wall_jump_component = NodePath("WallJumpComponent")
 animation_component = NodePath("AnimationComponent")
 aim_component = NodePath("AimComponent")
-hand = NodePath("Hand")
+hand = NodePath("")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -32)

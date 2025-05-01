@@ -8,7 +8,7 @@ func handle_horizontal_flip(move_direction: float) -> void:
 	if move_direction == 0:
 		return
 	sprite.flip_h = move_direction < 0
-
+	
 
 func handle_move_animation(move_direction: float) -> void:
 	handle_horizontal_flip(move_direction)
@@ -24,3 +24,7 @@ func handle_jump_animation(is_jumping: bool, is_falling: bool) -> void:
 		sprite.play("jump")
 	elif is_falling:
 		sprite.play("fall")
+
+func handle_aim_animation(aim_point: Vector2) -> void:
+	pass
+	
