@@ -135,3 +135,4 @@ position = Vector2(0, -26)
 shape = SubResource("RectangleShape2D_b6tgf")
 
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
+[connection signal="knockback_received" from="HurtBox" to="." method="_on_hurt_box_knockback_received"]

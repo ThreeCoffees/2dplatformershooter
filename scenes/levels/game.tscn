@@ -59,6 +59,7 @@ position = Vector2(508, 245)
 collision_layer = 8
 collision_mask = 10
 health_change = -5.0
+knockback = 500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("RectangleShape2D_xmnyv")

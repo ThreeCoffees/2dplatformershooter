@@ -114,3 +114,4 @@ shape = SubResource("RectangleShape2D_oe8id")
 [connection signal="health_changed" from="HealthComponent" to="HealthBar" method="_on_health_component_health_changed"]
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
 [connection signal="max_health_changed" from="HealthComponent" to="HealthBar" method="_on_health_component_max_health_changed"]
+[connection signal="knockback_received" from="HurtBox" to="." method="_on_hurt_box_knockback_received"]

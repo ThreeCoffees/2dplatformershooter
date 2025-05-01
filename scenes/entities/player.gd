@@ -26,3 +26,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_health_component_health_depleted() -> void:
 	print("Player died")
+
+
+func _on_hurt_box_knockback_received(knockback_force: Vector2) -> void:
+	velocity = knockback_force
