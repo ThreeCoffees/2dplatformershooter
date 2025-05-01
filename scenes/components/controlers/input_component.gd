@@ -11,4 +11,4 @@ func get_jump_input() -> JumpInput:
 	return JumpInput.new(Input.is_action_just_pressed("jump"), Input.is_action_just_released("jump"))
 	
 func get_aim_point() -> Vector2:
-	return get_viewport().get_mouse_position()
+	return get_viewport().get_camera_2d().get_global_mouse_position()

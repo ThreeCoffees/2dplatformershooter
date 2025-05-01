@@ -2,6 +2,11 @@ class_name AimComponent
 extends Node
 ## Component handling aiming
 
-func handle_aim(hand: Node2D, aim_point: Vector2) -> void:
-	hand.look_at(aim_point)
+var pivot: Node2D
+
+func _enter_tree() -> void:
+	pivot = get_parent().get_node("HandPivot")
 	
+
+func handle_aim(player: CharacterBody2D, aim_point: Vector2) -> void:
+	pivot.look_at(aim_point)
