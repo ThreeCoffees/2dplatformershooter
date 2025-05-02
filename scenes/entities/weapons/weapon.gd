@@ -20,9 +20,11 @@ func _process(delta: float) -> void:
 	pass
 
 func try_firing():
-	if !bullet_rate_timer.is_stopped(): return
-	fire()
-	bullet_rate_timer.start(firing_cooldown)
+	if not bullet_rate_timer.is_stopped(): 
+		return
+	else:
+		fire()
+		bullet_rate_timer.start(firing_cooldown)
 
 func fire():
 	print("shoot")
